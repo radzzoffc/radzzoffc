@@ -1,36 +1,135 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DDoS Attack Monitor</title>
-    <link rel="stylesheet" href="assets/styles.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CountDown || Radzz</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(135deg, #141e30, #243b55);
+      color: #ffffff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      flex-direction: column;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+    }
+
+    .timers {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      width: 90%;
+      max-width: 1000px;
+    }
+
+    .timer {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      text-align: center;
+      transition: transform 0.3s ease, background 0.3s ease;
+    }
+
+    .timer:hover {
+      transform: translateY(-10px);
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    .timer h2 {
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .countdown {
+      font-size: 1.2rem;
+      letter-spacing: 1px;
+      font-weight: bold;
+      color: #00ffcc;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <h1>🌐 Cloudflare DDoS Attack Monitor</h1>
-        <p>Memantau serangan yang diblokir oleh Cloudflare</p>
-        
-        <div class="card">
-            <h2>Jumlah Serangan DDoS:</h2>
-            <p id="attack-count" class="big-text">Loading...</p>
-        </div>
-
-        <div class="card">
-            <h2>Grafik Serangan Real-Time</h2>
-            <canvas id="attackChart"></canvas>
-        </div>
-
-        <div class="card">
-            <h2>Detail Serangan</h2>
-            <p><strong>Request Per Detik:</strong> <span id="rps">-</span></p>
-            <p><strong>IP Penyerang Terbanyak:</strong> <span id="top-ip">-</span></p>
-        </div>
-
-        <button onclick="resetCounter()">Reset Counter</button>
+    <p>
+        <marquee behavior="scroll" direction="left">Develop by RadzzOffc (Raditya)</marquee>
+    </p>
+    <div class="timer">
+  <h1>Islamic CountDown</h1>
+  <center>
+  <p>Request penambahan atau pembenaran kesalahan bisa chat Admin di bagian paling bawah</p></center>
+  </div>
+  <p></p>
+  <div class="timers">
+    <div class="timer">
+      <h2>Ramadhan 2025</h2>
+      <p class="countdown" data-time="2025-03-01T18:00:00"></p>
     </div>
+ <div class="timer">
+      <h2>Nuzulul Quran 2025</h2>
+      <p class="countdown" data-time="2025-03-07T12:00:00"></p>
+    </div>
+    <div class="timer">
+      <h2>Eid Al-Fitri 2025</h2>
+      <p class="countdown" data-time="2025-03-31T12:00:00"></p>
+    </div>
+ <div class="timer">
+      <h2>Eid Al-Adha 2025</h2>
+      <p class="countdown" data-time="2025-06-06T12:00:00"></p>
+    </div>
+    <div class="timer">
+    <h1>Hubungi Admin</h1>
+    <p>Wa: 085850493138</p>
+    <p>Tele: @WhoiamRdzz</p>
+    <p>Mail: radzzoffc@gmail.com</p>
+    </div>
+    <div class="timer">
+    <center>
+    <footer>By RadzzOffc (Raditya)</footer></center></div>
+    <p></p>
+  </div>
 
-    <script src="assets/script.js"></script>
+  <script>
+    function startCountdown() {
+      const countdownElements = document.querySelectorAll('.countdown');
+
+      countdownElements.forEach((element) => {
+        const targetDate = new Date(element.getAttribute('data-time')).getTime();
+
+        function updateTimer() {
+          const now = new Date().getTime();
+          const distance = targetDate - now;
+
+          if (distance < 0) {
+            element.textContent = 'Event di selesaikan';
+            return;
+          }
+
+          const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+          const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+          const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+          const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+          element.textContent = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+        }
+
+        updateTimer();
+        setInterval(updateTimer, 1000);
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', startCountdown);
+  </script>
 </body>
 </html>
