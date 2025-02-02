@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DDoS Attack Monitor</title>
+    <link rel="stylesheet" href="assets/styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>🌐 Cloudflare DDoS Attack Monitor</h1>
+        <p>Memantau serangan yang diblokir oleh Cloudflare</p>
+        
+        <div class="card">
+            <h2>Jumlah Serangan DDoS:</h2>
+            <p id="attack-count" class="big-text">Loading...</p>
+        </div>
+
+        <div class="card">
+            <h2>Grafik Serangan Real-Time</h2>
+            <canvas id="attackChart"></canvas>
+        </div>
+
+        <div class="card">
+            <h2>Detail Serangan</h2>
+            <p><strong>Request Per Detik:</strong> <span id="rps">-</span></p>
+            <p><strong>IP Penyerang Terbanyak:</strong> <span id="top-ip">-</span></p>
+        </div>
+
+        <button onclick="resetCounter()">Reset Counter</button>
+    </div>
+
+    <script src="assets/script.js"></script>
+</body>
+</html>
