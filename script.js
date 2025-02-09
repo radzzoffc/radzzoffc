@@ -1,4 +1,4 @@
-const honeypotURL = "https://google.com"; // Ganti dengan web penampung DDoS
+const honeypotURL = "https://cloudkuimages.xyz"; // Ganti dengan web penampung DDoS
 
 // Ambil data lama dari localStorage (biar live time)
 let totalRequests = parseInt(localStorage.getItem("totalRequests")) || 0;
@@ -8,7 +8,7 @@ let mitigatedRequests = parseInt(localStorage.getItem("mitigatedRequests")) || 0
 document.getElementById("requestCount").innerText = totalRequests;
 document.getElementById("mitigatedCount").innerText = mitigatedRequests;
 
-// Deteksi request asli dari fetch & XMLHttpRequest
+// Deteksi request asli melalui event
 function trackRequest() {
     totalRequests++;
     localStorage.setItem("totalRequests", totalRequests);
@@ -17,14 +17,14 @@ function trackRequest() {
     // Jika lebih dari 500 request aktif, redirect ke honeypot & tambah mitigasi
     if (totalRequests > 500) {
         document.getElementById("status").innerText = "DDoS terdeteksi, Redirecting...";
-        
+
         mitigatedRequests++;
         localStorage.setItem("mitigatedRequests", mitigatedRequests);
         document.getElementById("mitigatedCount").innerText = mitigatedRequests;
-        
+
         setTimeout(() => {
             window.location.href = honeypotURL;
-        }, 1000);
+        }, 1000); // Tunggu 1 detik sebelum redirect
     } else {
         document.getElementById("status").innerText = "Trafik normal";
     }
@@ -54,6 +54,6 @@ setInterval(() => {
 
     document.getElementById("requestCount").innerText = totalRequests;
     document.getElementById("mitigatedCount").innerText = mitigatedRequests;
-    document.getElementById("status").innerText = "Data direset otomatis";
+    document.getElementById("status").innerText = "🔄 Data direset otomatis.";
 
-}, 5 * 60 * 1000); // 5 menit dalam milidetik
+}, 30 * 60 * 1000); // 30 menit dalam milidetik
