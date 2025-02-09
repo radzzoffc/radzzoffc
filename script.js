@@ -1,6 +1,6 @@
 // **SITE KEY DI-HIDE MENGGUNAKAN ENCODING**
 const encodedKey = "MHg0QUFBQUFBQThHcDFmT25GcjVZYmZwCg=="; // Base64 Encoded Key
-const siteKey = atob(encodedKey).replace(/XyWRootenZz\|my\|id/g, "-");
+const siteKey = atob(encodedKey);
 
 // Inject Turnstile Captcha ke halaman
 document.getElementById("captcha-container").innerHTML = `<div class="cf-turnstile" data-sitekey="${siteKey}"></div>`;
