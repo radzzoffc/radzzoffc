@@ -23,7 +23,7 @@ file_put_contents($file, "$ip\n", FILE_APPEND);
         <p>IP Anda: <strong><?php echo $ip; ?></strong></p>
 
         <form action="verify.php" method="post">
-            <div class="cf-turnstile" data-sitekey="YOUR_CLOUDFLARE_SITE_KEY"></div> <!-- Ganti dengan SITE KEY Cloudflare -->
+            <div class="cf-turnstile" data-sitekey="0x4AAAAAAA8Gp1fOnFr5Ybfp"></div> <!-- Ganti dengan SITE KEY Cloudflare -->
             
             <!-- Honeypot Field (Hidden untuk manusia, terbaca oleh bot) -->
             <input type="text" name="honeypot" style="display:none;">
