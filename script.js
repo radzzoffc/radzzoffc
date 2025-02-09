@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const siteKey = "0x4AAAAAAA8Gp1fOnFr5Ybfp"; // Site Key yang kamu kasih
+    const siteKey = "0x4AAAAAAA8Gp1fOnFr5Ybfp"; // Site Key kamu
 
     // Inject Captcha ke halaman
     document.getElementById("captcha-container").innerHTML = 
@@ -11,19 +11,22 @@ document.addEventListener("DOMContentLoaded", function () {
         const token = document.querySelector("[name='cf-turnstile-response']")?.value;
         const honeypot = document.querySelector("[name='honeypot']").value;
 
-        // Jika bot mengisi honeypot, redirect ke jebakan
+        // 🔥 Kalau bot terdeteksi, redirect ke honeypot
         if (honeypot) {
-            window.location.href = "https://google.com";
+            window.location.href = "https://google.com"; // Ganti dengan URL jebakan
             return;
         }
 
-        // Jika Captcha belum diisi
+        // Kalau Captcha belum diisi, kasih fake error delay
         if (!token) {
-            document.getElementById("status").innerText = "Selesaikan chaptcha dulu woee!";
+            document.getElementById("status").innerText = "Sistem mendeteksi aktivitas mencurigakan...";
+            setTimeout(() => {
+                document.getElementById("status").innerText = "Akses Ditolak! Bot terdeteksi.";
+            }, 3000);
             return;
         }
 
-        // Redirect ke halaman sukses setelah verifikasi selesai
+        // Kalau lolos Captcha, redirect normal ke success.html
         setTimeout(() => {
             window.location.href = "radzz.html";
         }, 1000);
