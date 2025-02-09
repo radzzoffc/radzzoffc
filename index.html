@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verifikasi Captcha</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+</head>
+<body>
+    <div class="container">
+        <h2>Verifikasi Captcha</h2>
+        <form id="captchaForm">
+            <!-- Honeypot (Hidden Input) untuk deteksi bot -->
+            <input type="text" name="honeypot" style="display: none;">
+
+            <!-- Turnstile Captcha -->
+            <div id="captcha-container"></div>
+
+            <button type="submit">Verifikasi</button>
+        </form>
+        <p id="status"></p>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
