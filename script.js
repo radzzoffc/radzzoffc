@@ -56,4 +56,4 @@ setInterval(() => {
     document.getElementById("mitigatedCount").innerText = mitigatedRequests;
     document.getElementById("status").innerText = "Data direset otomatis";
 
-}, 30 * 60 * 1000); // 30 menit dalam milidetik
+}, 5 * 60 * 1000); // 5 menit dalam milidetik
