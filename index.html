@@ -1,23 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DDoS Analyzer | RadzzOffc</title>
-  <link rel="stylesheet" href="statuse.css">
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RadzzOffc | OffcSite</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="cyber-container">
-    <h1 class="cyber-title">🚨DDoS Analyzer🚨</h1>
-    <p class="cyber-subtitle">Real-time Layer 4 & Layer 7 Traffic Analysis</p>
-    <div class="chart-container">
-      <canvas id="trafficChart"></canvas>
+    <div class="container">
+        <h1>Page Monitor</h1>
+        <p><strong>Requests Saat Ini:</strong> <span id="requestCount">0</span></p>
+        <p id="status">Menunggu trafik...</p>
+
+        <hr>
+
+        <h2>Mitigated Traffic</h2>
+        <p><strong>Total Dialihkan:</strong> <span id="mitigatedCount">0</span></p>
     </div>
-    <div class="status-box">
-      <p id="statusText">Status: <span class="normal">Normal</span></p>
-    </div>
-  </div>
-  <script src="bione.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
