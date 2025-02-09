@@ -15,7 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         die("Verifikasi gagal. Silakan coba lagi.");
     }
 
-    $secret_key = "YOUR_CLOUDFLARE_SECRET_KEY"; // Ganti dengan SECRET KEY Cloudflare
+    $secret_key = "0x4AAAAAAA8Gp2SFdexVP304bPzdVxv-5Dk"; // Ganti dengan SECRET KEY Cloudflare
     $verify_url = "https://challenges.cloudflare.com/turnstile/v0/siteverify";
     
     $data = [
