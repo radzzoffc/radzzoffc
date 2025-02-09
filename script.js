@@ -8,13 +8,10 @@ let mitigatedRequests = parseInt(localStorage.getItem("mitigatedRequests")) || 0
 document.getElementById("requestCount").innerText = totalRequests;
 document.getElementById("mitigatedCount").innerText = mitigatedRequests;
 
-function detectDDoS() {
+// Deteksi request asli dari fetch & XMLHttpRequest
+function trackRequest() {
     totalRequests++;
-
-    // Simpan ke localStorage biar live time
     localStorage.setItem("totalRequests", totalRequests);
-
-    // Update tampilan traffic secara live
     document.getElementById("requestCount").innerText = totalRequests;
 
     // Jika lebih dari 500 request aktif, redirect ke honeypot & tambah mitigasi
@@ -33,6 +30,21 @@ function detectDDoS() {
     }
 }
 
+// Intercept fetch API (untuk menangkap request asli)
+const originalFetch = window.fetch;
+window.fetch = function(...args) {
+    trackRequest();
+    return originalFetch.apply(this, args);
+};
+
+// Intercept XMLHttpRequest (untuk menangkap request AJAX)
+const originalXHR = window.XMLHttpRequest;
+window.XMLHttpRequest = function() {
+    const xhr = new originalXHR();
+    xhr.addEventListener("load", trackRequest);
+    return xhr;
+};
+
 // Reset data setiap 30 menit
 setInterval(() => {
     totalRequests = 0;
@@ -42,9 +54,6 @@ setInterval(() => {
 
     document.getElementById("requestCount").innerText = totalRequests;
     document.getElementById("mitigatedCount").innerText = mitigatedRequests;
-    document.getElementById("status").innerText = "Data direset";
+    document.getElementById("status").innerText = "Data direset otomatis";
 
 }, 30 * 60 * 1000); // 30 menit dalam milidetik
-
-// Jalankan fungsi deteksi setiap 100ms
-setInterval(detectDDoS, 100);
