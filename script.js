@@ -13,19 +13,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // Jika bot mengisi honeypot, redirect ke jebakan
         if (honeypot) {
-            window.location.href = "https://example.com/honeypot";
+            window.location.href = "https://google.com";
             return;
         }
 
         // Jika Captcha belum diisi
         if (!token) {
-            document.getElementById("status").innerText = "Silakan selesaikan Captcha!";
+            document.getElementById("status").innerText = "Selesaikan chaptcha dulu woee!";
             return;
         }
 
         // Redirect ke halaman sukses setelah verifikasi selesai
         setTimeout(() => {
-            window.location.href = "succes.html";
+            window.location.href = "radzz.html";
         }, 1000);
     });
 });
