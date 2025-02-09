@@ -1,0 +1,34 @@
+body {
+    font-family: 'Courier New', monospace;
+    background-color: black;
+    color: #00ff00;
+    text-align: center;
+    padding: 20px;
+}
+
+.container {
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+    background-color: #001a00;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #00ff00;
+}
+
+h1, h2 {
+    text-shadow: 0 0 5px #00ff00;
+}
+
+p {
+    font-size: 18px;
+}
+
+#status {
+    font-weight: bold;
+    color: #ff0000;
+}
+
+hr {
+    border: 1px solid #00ff00;
+    margin: 20px 0;
+}
