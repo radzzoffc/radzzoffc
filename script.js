@@ -1,5 +1,5 @@
 // **SITE KEY DI-HIDE MENGGUNAKAN ENCODING**
-const encodedKey = "WFlWUm9vdGVuWnp8bXl8aWQ="; // Base64 Encoded Key
+const encodedKey = "MHg0QUFBQUFBQThHcDFmT25GcjVZYmZwCg=="; // Base64 Encoded Key
 const siteKey = atob(encodedKey).replace(/XyWRootenZz\|my\|id/g, "-");
 
 // Inject Turnstile Captcha ke halaman
@@ -12,7 +12,7 @@ document.getElementById("captchaForm").addEventListener("submit", function(event
     const honeypot = document.querySelector("[name='honeypot']").value;
 
     if (honeypot) {
-        window.location.href = "https://example.com/honeypot"; // Redirect ke jebakan bot
+        window.location.href = "https://google.com"; // Redirect ke jebakan bot
         return;
     }
 
