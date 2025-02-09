@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // Redirect ke halaman sukses setelah verifikasi selesai
         setTimeout(() => {
-            window.location.href = "success.html";
+            window.location.href = "succes.html";
         }, 1000);
     });
 });
