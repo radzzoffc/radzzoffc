@@ -1,0 +1,28 @@
+// **SITE KEY DI-HIDE MENGGUNAKAN ENCODING**
+const encodedKey = "WFlWUm9vdGVuWnp8bXl8aWQ="; // Base64 Encoded Key
+const siteKey = atob(encodedKey).replace(/XyWRootenZz\|my\|id/g, "-");
+
+// Inject Turnstile Captcha ke halaman
+document.getElementById("captcha-container").innerHTML = `<div class="cf-turnstile" data-sitekey="${siteKey}"></div>`;
+
+document.getElementById("captchaForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+    
+    const token = document.querySelector("[name='cf-turnstile-response']")?.value;
+    const honeypot = document.querySelector("[name='honeypot']").value;
+
+    if (honeypot) {
+        window.location.href = "https://example.com/honeypot"; // Redirect ke jebakan bot
+        return;
+    }
+
+    if (!token) {
+        document.getElementById("status").innerText = "Silakan selesaikan Captcha!";
+        return;
+    }
+
+    // Simulasi verifikasi sukses (karena tanpa backend)
+    setTimeout(() => {
+        window.location.href = "success.html";
+    }, 1000);
+});
