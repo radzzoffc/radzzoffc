@@ -11,12 +11,10 @@
     <div class="container">
         <h2>Verifikasi Captcha</h2>
         <form id="captchaForm">
-            <!-- Honeypot (Hidden Input) untuk deteksi bot -->
             <input type="text" name="honeypot" style="display: none;">
-
-            <!-- Turnstile Captcha -->
+            
             <div id="captcha-container"></div>
-
+            
             <button type="submit">Verifikasi</button>
         </form>
         <p id="status"></p>
