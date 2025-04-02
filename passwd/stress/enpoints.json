@@ -1,6 +1,0 @@
-{
-  "endpoints": [
-    "http://api.example.com/attack1",
-    "http://api.example.com/attack2"
-  ]
-}
