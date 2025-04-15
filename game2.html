@@ -1,46 +1,39 @@
 <!DOCTYPE html>
 <html lang="id">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Radzz | SimpleShootter</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    canvas {
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Radzz | SimpleShootter</title>
+	<script src="https://cdn.tailwindcss.com"></script>
+	<style type="text/css">canvas {
       background: linear-gradient(to bottom, #0f172a, #1e293b);
       border-radius: 1rem;
       box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
       touch-action: none;
     }
     ::selection { background: #0ff; color: #000; }
-  </style>
+	</style>
 </head>
 <body class="bg-gray-950 text-white font-sans flex flex-col min-h-screen">
-  <header class="bg-gray-800 text-center py-4 shadow-md">
-    <h1 class="text-2xl font-bold tracking-wider text-cyan-400">RDZZ SSHOOTER</h1>
-    <p class="text-sm text-gray-400">3 bola tembus ke bawah, defeat aowkwowkwk</p>
-  </header>
+<header class="bg-gray-800 text-center py-4 shadow-md">
+<h1 class="text-2xl font-bold tracking-wider text-cyan-400">RDZZ SSHOOTER</h1>
 
-  <main class="flex-grow flex flex-col items-center justify-center p-4 space-y-4">
-    <div class="space-x-2">
-      <button id="startBtn" class="bg-cyan-600 hover:bg-cyan-700 px-4 py-2 rounded-full text-sm uppercase shadow">Mulai</button>
-      <button id="restartBtn" class="bg-red-600 hover:bg-red-700 px-4 py-2 rounded-full text-sm uppercase shadow hidden">Restart</button>
-    </div>
-    <div class="text-lg">
-      Score: <span id="score" class="text-yellow-400 font-bold">0</span>
-    </div>
-    <div class="w-full max-w-xs text-left">
-  <h2 class="text-cyan-400 font-semibold mb-2">Leaderboard Global</h2>
-  <ul id="leaderboard" class="space-y-1 text-sm text-gray-300"></ul>
+<p class="text-sm text-gray-400">3 bola tembus ke bawah, defeat aowkwowkwk</p>
+</header>
+
+<main class="flex-grow flex flex-col items-center justify-center p-4 space-y-4">
+<div class="space-x-2"><button class="bg-cyan-600 hover:bg-cyan-700 px-4 py-2 rounded-full text-sm uppercase shadow" id="startBtn">Mulai</button><button class="bg-red-600 hover:bg-red-700 px-4 py-2 rounded-full text-sm uppercase shadow hidden" id="restartBtn">Restart</button></div>
+
+<div class="text-lg">Score: <span class="text-yellow-400 font-bold" id="score">0</span></div>
+
+<div class="w-full max-w-xs text-left">
+<h2 class="text-cyan-400 font-semibold mb-2">Leaderboard Global</h2>
+
+<ul class="space-y-1 text-sm text-gray-300" id="leaderboard">
+</ul>
 </div>
-    <canvas id="gameCanvas" width="320" height="480"></canvas>
-  </main>
+<canvas height="480" id="gameCanvas" width="320"></canvas></main>
 
-  <footer class="bg-gray-800 text-center py-3 text-sm text-gray-500">
-    &copy; RADZZOFFC
-  </footer>
-
-  <script>
+<footer class="bg-gray-800 text-center py-3 text-sm text-gray-500">&copy; RADZZOFFC</footer>
+<script>
     alert("Welkamm, Main aja kalo gabut\n\nDeveloped by Radzz");
 
     const canvas = document.getElementById("gameCanvas");
@@ -162,24 +155,67 @@
     const leaderboardEl = document.getElementById("leaderboard");
 
 const fetchLeaderboard = async () => {
-  const res = await fetch("http://be.radzzoffc.site:3000/api/leaderboard");
-  const data = await res.json();
-  leaderboardEl.innerHTML = data.map((entry, i) => `
-    <li class="flex justify-between border-b border-gray-700 py-1 px-2">
-      <span class="text-cyan-300">${i + 1}. ${entry.name}</span>
-      <span class="text-yellow-300">${entry.score}</span>
-    </li>
-  `).join('');
+  try {
+    // Gunakan HTTPS untuk API endpoint
+    const res = await fetch("https://be.radzzoffc.site/api/leaderboard", {
+      mode: 'cors' // Mode CORS eksplisit
+    });
+    
+    if (!res.ok) {
+      throw new Error(`HTTP error! status: ${res.status}`);
+    }
+    
+    const data = await res.json();
+    
+    // Tambahkan pengecekan data kosong
+    if (!data || data.length === 0) {
+      leaderboardEl.innerHTML = `
+        <li class="text-gray-500 py-2 px-2">
+          Belum ada data leaderboard
+        </li>
+      `;
+      return;
+    }
+    
+    leaderboardEl.innerHTML = data.map((entry, i) => `
+      <li class="flex justify-between border-b border-gray-700 py-1 px-2">
+        <span class="text-cyan-300">${i + 1}. ${entry.name || 'Anonymous'}</span>
+        <span class="text-yellow-300">${entry.score || 0}</span>
+      </li>
+    `).join('');
+    
+  } catch (error) {
+    console.error("Fetch error:", error);
+    leaderboardEl.innerHTML = `
+      <li class="text-red-400 py-2 px-2">
+        Gagal memuat leaderboard. Coba refresh halaman.
+      </li>
+    `;
+  }
 };
 
 const saveScore = async (score) => {
   const name = prompt("Masukkan nama kamu:") || "Player";
-  await fetch("http://be.radzzoffc.site:3000/api/leaderboard", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ name, score })
-  });
-  fetchLeaderboard();
+  try {
+    const response = await fetch("https://be.radzzoffc.site/api/leaderboard", {
+      method: "POST",
+      headers: { 
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+      body: JSON.stringify({ name, score }),
+      mode: 'cors'
+    });
+    
+    if (!response.ok) {
+      throw new Error('Gagal menyimpan skor');
+    }
+    
+    fetchLeaderboard();
+  } catch (error) {
+    console.error("Save score error:", error);
+    alert("Gagal menyimpan skor: " + error.message);
+  }
 };
 
 const gameOver = () => {
@@ -255,6 +291,5 @@ let devtools = {
     }
   }, 1000);
 })();
-  </script>
-</body>
+  </script></body>
 </html>
