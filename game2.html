@@ -162,7 +162,7 @@
     const leaderboardEl = document.getElementById("leaderboard");
 
 const fetchLeaderboard = async () => {
-  const res = await fetch("http://159.65.201.13:3000/api/leaderboard");
+  const res = await fetch("https://be.radzzoffc.site:3000/api/leaderboard");
   const data = await res.json();
   leaderboardEl.innerHTML = data.map((entry, i) => `
     <li class="flex justify-between border-b border-gray-700 py-1 px-2">
@@ -174,7 +174,7 @@ const fetchLeaderboard = async () => {
 
 const saveScore = async (score) => {
   const name = prompt("Masukkan nama kamu:") || "Player";
-  await fetch("http://159.65.201.13:3000/api/leaderboard", {
+  await fetch("https://be.radzzoffc.site:3000/api/leaderboard", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ name, score })
