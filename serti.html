@@ -1,0 +1,149 @@
+<!DOCTYPE html><html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Radzz | Certificates</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+        },
+      },
+    }
+  </script>
+  <style>
+    body {
+      background-color: #0f172a;
+    }
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: -1;
+    }
+  </style>
+</head>
+<body class="text-white font-sans">
+  <canvas id="particles"></canvas>  <div class="min-h-screen p-8">
+    <h1 class="text-4xl font-bold mb-6 text-center">My Certificates</h1>
+    <!-- Awal -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+      <div class="bg-gray-800 rounded-2xl overflow-hidden shadow-lg hover:scale-105 transition-transform">
+        <img src="https://radzzoffc.site/uploads/VisualXCommunity_8608.jpg" alt="Certificate 1" class="w-full h-48 object-cover" />
+        <div class="p-4">
+          <h2 class="text-xl font-semibold">Information Security</h2>
+          <p class="text-gray-400">Diperoleh dari CyberAcademy<br>18-04-2025</p>
+        </div>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+      <div class="bg-gray-800 rounded-2xl overflow-hidden shadow-lg hover:scale-105 transition-transform">
+        <img src="https://radzzoffc.site/uploads/VisualXCommunity_6370.jpg" alt="Certificate 2" class="w-full h-48 object-cover" />
+        <div class="p-4">
+          <h2 class="text-xl font-semibold">Basic Web Programs</h2>
+          <p class="text-gray-400">Diperoleh dari DicodingAcademy<br>17-04-2025</p>
+        </div>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+      <div class="bg-gray-800 rounded-2xl overflow-hidden shadow-lg hover:scale-105 transition-transform">
+        <img src="https://radzzoffc.site/uploads/VisualXCommunity_8151.jpg" alt="Certificate 3" class="w-full h-48 object-cover" />
+        <div class="p-4">
+          <h2 class="text-xl font-semibold">Information Security</h2>
+          <p class="text-gray-400">Diperoleh dari DicodingAcademy<br>17-04-2025</p>
+        </div>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+      <div class="bg-gray-800 rounded-2xl overflow-hidden shadow-lg hover:scale-105 transition-transform">
+        <img src="https://radzzoffc.site/uploads/VisualXCommunity_6593.jpg" alt="Certificate 4" class="w-full h-48 object-cover" />
+        <div class="p-4">
+          <h2 class="text-xl font-semibold">Basic CTF Challenge</h2>
+          <p class="text-gray-400">Diperoleh karena penyelenggara sekaligus menyelesaikan Challenge<br>17-04-2025</p>
+        </div>
+      </div>
+      <!-- Batas-->
+    </div>
+  </div>  <script>
+      alert('Here, U can see all of my sertificate')
+    const canvas = document.getElementById('particles');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+
+    function resize() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+
+    window.addEventListener('resize', resize);
+    resize();
+
+    for (let i = 0; i < 100; i++) {
+      particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        radius: Math.random() * 2 + 1,
+        speedX: Math.random() - 0.5,
+        speedY: Math.random() - 0.5,
+      });
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (let p of particles) {
+        p.x += p.speedX;
+        p.y += p.speedY;
+
+        if (p.x < 0 || p.x > canvas.width) p.speedX *= -1;
+        if (p.y < 0 || p.y > canvas.height) p.speedY *= -1;
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.6)';
+        ctx.fill();
+      }
+      requestAnimationFrame(animate);
+    }
+    animate();
+    document.addEventListener('contextmenu', function(e) {
+  e.preventDefault();
+  alert("Akses klik kanan diblokir");
+});
+
+document.onkeydown = function(e) {
+  if (e.keyCode == 123) {
+    alert("Akses Developer Tools diblokir");
+    return false;
+  }
+  if (e.ctrlKey && (e.shiftKey && (e.keyCode == 73 || e.keyCode == 74 || e.keyCode == 67)) || 
+      e.ctrlKey && (e.keyCode == 85 || e.keyCode == 83)) {
+    alert("Shortcut DevTools diblokir");
+    return false;
+  }
+};
+
+let devtools = {
+  open: false,
+  orientation: null,
+};
+(function() {
+  const threshold = 160;
+  setInterval(function() {
+    const widthThreshold = window.outerWidth - window.innerWidth > threshold;
+    const heightThreshold = window.outerHeight - window.innerHeight > threshold;
+    if (widthThreshold || heightThreshold) {
+      if (!devtools.open) {
+        alert("DevTools terdeteksi, Akses diblokir");
+      }
+      devtools.open = true;
+    } else {
+      devtools.open = false;
+    }
+  }, 1000);
+})();
+  </script></body>
+      </html>
