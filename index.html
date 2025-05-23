@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Situs sedang dalam pembangunan.">
+  <title>Under Building | Radzz TypeByte</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .digit {
+      @apply text-4xl sm:text-5xl font-bold text-white;
+    }
+
+    .label {
+      @apply text-sm text-gray-400;
+    }
+
+    .spinner {
+      @apply w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full mx-auto mb-6;
+      animation: spin 1s linear infinite;
+    }
+  </style>
+</head>
+<div id="particles-js"></div>
+<body class="bg-black min-h-screen flex items-center justify-center px-4 text-white">
+  <div class="max-w-xl w-full bg-zinc-900 shadow-2xl rounded-2xl px-8 py-10 text-center border border-gray-700 relative overflow-hidden">
+    <div class="spinner"></div>
+    <h1 class="text-3xl sm:text-4xl font-bold text-blue-400 mb-3 tracking-wide">Under Building</h1>
+    <p class="text-gray-300 text-lg mb-8">Situs sedang dalam pengembangan. Akan dimulai dalam:</p>
+    <div id="countdown" class="grid grid-cols-4 gap-4 justify-center mb-8">
+      <div>
+        <div id="days" class="digit">0</div>
+        <div class="label">Hari</div>
+      </div>
+      <div>
+        <div id="hours" class="digit">0</div>
+        <div class="label">Jam</div>
+      </div>
+      <div>
+        <div id="minutes" class="digit">0</div>
+        <div class="label">Menit</div>
+      </div>
+      <div>
+        <div id="seconds" class="digit">0</div>
+        <div class="label">Detik</div>
+      </div>
+    </div>
+
+    <a href="https://t.me/WhoiamRdzz"
+       class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded-xl transition text-lg">
+      Hubungi Owner
+    </a>
+
+    <p class="mt-6 text-sm text-gray-500">Radzz | TypeByte &copy; 2025</p>
+  </div>
+
+  <script>
+    function parseLocalDate(dateStr) {
+      const [datePart, timePart] = dateStr.split(' ');
+      const [day, month, year] = datePart.split('-').map(Number);
+      const [hour, minute] = timePart.split(':').map(Number);
+      return new Date(year, month - 1, day, hour, minute);
+    }
+
+    const eventDateStr = "10-06-2025 00:00";
+    const eventDate = parseLocalDate(eventDateStr).getTime();
+
+    const countdown = () => {
+      const now = new Date().getTime();
+      const distance = eventDate - now;
+
+      if (distance < 0) {
+        document.getElementById("countdown").innerHTML =
+          "<p class='text-green-400 font-semibold text-xl'>selesai</p>";
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      document.getElementById("days").textContent = days;
+      document.getElementById("hours").textContent = hours;
+      document.getElementById("minutes").textContent = minutes;
+      document.getElementById("seconds").textContent = seconds;
+    };
+
+    setInterval(countdown, 1000);
+    countdown();
+    
+    particlesJS.load('particles-js', 'particles.json', function() {
+    console.log('Particles loaded.');
+});
+  </script>
+
+</body>
+</html>
